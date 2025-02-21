@@ -17,7 +17,7 @@ import {
 } from '@mui/material';
 import { getAllClients, getClientById, updateClient, deleteClient, registerClient } from '../services/client';
 import { toast } from 'react-toastify';
-import { Edit, Delete, Add } from '@mui/icons-material'; // Íconos de Material UI
+import { Edit, Delete, Add } from '@mui/icons-material';
 
 const Clientes = () => {
   const [clientes, setClientes] = useState([]);

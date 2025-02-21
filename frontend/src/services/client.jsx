@@ -26,9 +26,9 @@ const loginClient = async (loginData) => {
 
 
 
-const getAllClients = async () => {
+const getAllClients = async (clientData) => {
     try {
-        const response = await axios.get(`https://sodaalamoapp.onrender.com/client/register`, clientData);
+        const response = await axios.get(`https://sodaalamoapp.onrender.com/client`, clientData);
         return response.data;
     } catch (error) {
         console.error("Error al obtener los clientes:", error.response || error);
@@ -56,7 +56,7 @@ export const getClientById = async (clientId) => {
 };
 
 
-const updateClient = async (id, clientData) => {
+const updateClient = async (clientId, clientData) => {
     const token = sessionStorage.getItem("token");
     if (!token) {
         throw new Error("Token not found in sessionStorage");
@@ -77,7 +77,7 @@ const updateClient = async (id, clientData) => {
     }
 };
 
-const deleteClient = async (id) => {
+const deleteClient = async (clientId) => {
     const token = sessionStorage.getItem("token");
     if (!token) {
         throw new Error("Token not found in sessionStorage");
