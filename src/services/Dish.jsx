@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const URL = import.meta.env.VITE_API_URL;
+const LINK = import.meta.env.VITE_API_LINK;
 
 const postDish = async (dishData) => {
     try {
-        const response = await axios.post(`${URL}/dish`, dishData);
+        const response = await axios.post(`${LINK}/dish`, dishData);
         return response.data
     } catch (error) {
         throw error.response?.data || { message: "Error al crear el platillo"}
@@ -13,7 +13,7 @@ const postDish = async (dishData) => {
 
 const getDish = async () => {
     try {
-        const response = await axios.get(`${URL}/dish`);
+        const response = await axios.get(`${LINK}/dish`);
         return response.data;
     } catch (error) {
         throw error.response?.data || { message: "Error al obtener platillos"};
@@ -22,7 +22,7 @@ const getDish = async () => {
 
 const getDishById = async (id) => {
     try {
-        const response = await axios.get(`${URL}/dish/${id}`);
+        const response = await axios.get(`${LINK}/dish/${id}`);
         return response.data;
     } catch (error) {
         throw error.response?.data || { message: " Error al obtener platillo " }
@@ -31,7 +31,7 @@ const getDishById = async (id) => {
 
 const updateDish = async (id) => {
     try {
-        const response = await axios.put(`${URL}/dish/${id}`);
+        const response = await axios.put(`${LINK}/dish/${id}`);
         return response.data;   
     } catch (error) {
         throw error.response?.data || { message: " Error al actualizar el platillo "};
@@ -40,7 +40,7 @@ const updateDish = async (id) => {
 
 const deleteDish = async (id) => {
     try {
-        const response = await axios.delete(`${URL}/dish/${id}`);
+        const response = await axios.delete(`${LINK}/dish/${id}`);
         return response.data;
     } catch (error) {
         throw error.response?.data || { message: " Error al eliminar el platillo "};

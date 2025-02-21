@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const URL = import.meta.env.VITE_API_URL;
+const LINK = import.meta.env.VITE_API_LINK;
 
 const postDishCategory = async (dishCategoryData) => {
     try {
-        const response = await axios.post(`${URL}/dishC`, dishCategoryData);
+        const response = await axios.post(`${LINK}/dishC`, dishCategoryData);
         return response.data;
     } catch (error) {
         throw error.response?.data || {message: " Error al crear categoria "};
@@ -14,7 +14,7 @@ const postDishCategory = async (dishCategoryData) => {
 
 const getDishCategory = async (dishCategoryData) => {
     try{
-        const response = await axios.get(`${URL}/dishC`);
+        const response = await axios.get(`${LINK}/dishC`);
         return response.data;
     } catch (error) {
         throw error.response?.data || {message: " Error al obtener categoria "}
@@ -23,7 +23,7 @@ const getDishCategory = async (dishCategoryData) => {
 
 const deleteDishCategory = async (id) => {
     try {
-        const response = await axios.delete(`${URL}/dishC/${id}`);
+        const response = await axios.delete(`${LINK}/dishC/${id}`);
         return response.data;
     } catch (error) {
         throw error.response?.data || { message: "Error al eliminar categoria" }

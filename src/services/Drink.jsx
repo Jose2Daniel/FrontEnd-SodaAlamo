@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const URL = import.meta.env.VITE_API_URL;
+const LINK = import.meta.env.VITE_API_LINK;
 
 const postDrink = async (drinkData) => {
     try {
-        const response = await axios.post(`${URL}/drink`, drinkData);
+        const response = await axios.post(`${LINK}/drink`, drinkData);
         return response.data;
     } catch (error) {
         throw error.response?.data || { message: " Error al crear bebida "};
@@ -13,7 +13,7 @@ const postDrink = async (drinkData) => {
 
 const getDrink = async () => {
     try {
-        const response = await axios.get(`${URL}/drink`)
+        const response = await axios.get(`${LINK}/drink`)
         return response.data
     } catch (error) {
         throw error.response?.data || { message: " Error al obtener bebidas "};
@@ -22,7 +22,7 @@ const getDrink = async () => {
 
 const putDrink = async (id, datos) => {
     try {
-        const response = await axios.put(`${URL}/drink/${id}`);
+        const response = await axios.put(`${LINK}/drink/${id}`);
         return response.data;
     } catch (error) {
         throw error.response?.data || { message: " Error al editar categoria "}
@@ -31,7 +31,7 @@ const putDrink = async (id, datos) => {
 
 const deleteDrink = async (id) => {
     try {
-        const response = await axios.delete(`${URL}/drink/${id}`);
+        const response = await axios.delete(`${LINK}/drink/${id}`);
         return response.data
     } catch (error) {
         throw error.response?.data || { message: " Error al eliminar categoria "};

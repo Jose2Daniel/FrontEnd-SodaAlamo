@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-const URL = import.meta.env.VITE_API_URL;
+const LINK = import.meta.env.VITE_API_LINK;
 
 
 const createTypeDish = async (typeDishData) => {
     try {
-        const response = await axios.post(`${URL}/typeDish`, typeDishData); // Añadir 'await'
+        const response = await axios.post(`${LINK}/typeDish`, typeDishData); // Añadir 'await'
         return response.data;
     } catch (error) {
         throw error.response?.data || { message: "Error al crear tipo de platillo" };
@@ -15,7 +15,7 @@ const createTypeDish = async (typeDishData) => {
 
 const getTypeDish = async(id) => {
     try {
-        const response = await axios.get(`${URL}/typeDish/${id}`);
+        const response = await axios.get(`${LINK}/typeDish/${id}`);
         return response.data;
     } catch (error) {
         throw error.response?.data || { message: " Error al obtener tipo "};
@@ -24,7 +24,7 @@ const getTypeDish = async(id) => {
 
 const getAllTypeDish = async () => {
     try {
-        const response = await axios.get(`${URL}/typeDish`); // Añadir 'await'
+        const response = await axios.get(`${LINK}/typeDish`); // Añadir 'await'
         return response.data;
     } catch (error) {
         throw error.response?.data || { message: "Error al obtener tipos de platillos" };
@@ -34,7 +34,7 @@ const getAllTypeDish = async () => {
 
 const putTypeDish = async (id) => {
     try {
-        const response = await axios.put(`${URL}/typeDish/${id}`);
+        const response = await axios.put(`${LINK}/typeDish/${id}`);
         return response.data;
     } catch (error) {
         throw error.response?.data || { message: " Error al actualizar el tipo de "}
@@ -43,7 +43,7 @@ const putTypeDish = async (id) => {
 
 const deleteTypeDish = async (id) => {
     try {
-        const response = await axios.delete(`${URL}/typeDish/${id}`);
+        const response = await axios.delete(`${LINK}/typeDish/${id}`);
         return response.data;
     } catch (error) {
         throw error.response?.data || { message: " Error al eliminar tipo de platillo "};

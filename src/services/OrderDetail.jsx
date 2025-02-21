@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const URL = import.meta.env.VITE_API_URL;
+const LINK = import.meta.env.VITE_API_LINK;
 
 const postOrderDetail = async (orderDetailData) => {
     try {
-        const response = await axios.post(`${URL}/orderDetail`, orderDetailData);
+        const response = await axios.post(`${LINK}/orderDetail`, orderDetailData);
         return response.data;
     } catch (error) {
         throw error.response?.data || { message: "Error al crear el detalle de la orden" };
@@ -13,7 +13,7 @@ const postOrderDetail = async (orderDetailData) => {
 
 const getOrderDetail = async () => {
     try {
-        const response = await axios.get(`${URL}/orderDetail`);
+        const response = await axios.get(`${LINK}/orderDetail`);
         return response.data;
     } catch (error) {
         throw error.response?.data || { message: "Error al obtener los detalles de las órdenes" };
@@ -22,7 +22,7 @@ const getOrderDetail = async () => {
 
 const getOrderDetailById = async (id) => {
     try {
-        const response = await axios.get(`${URL}/orderDetail/${id}`);
+        const response = await axios.get(`${LINK}/orderDetail/${id}`);
         return response.data;
     } catch (error) {
         throw error.response?.data || { message: "Error al obtener el detalle de la orden" };
@@ -31,7 +31,7 @@ const getOrderDetailById = async (id) => {
 
 const updateOrderDetail = async (id, orderDetailData) => {
     try {
-        const response = await axios.put(`${URL}/orderDetail/${id}`, orderDetailData);
+        const response = await axios.put(`${LINK}/orderDetail/${id}`, orderDetailData);
         return response.data;
     } catch (error) {
         throw error.response?.data || { message: "Error al actualizar el detalle de la orden" };
@@ -40,7 +40,7 @@ const updateOrderDetail = async (id, orderDetailData) => {
 
 const deleteOrderDetail = async (id) => {
     try {
-        const response = await axios.delete(`${URL}/orderDetail/${id}`);
+        const response = await axios.delete(`${LINK}/orderDetail/${id}`);
         return response.data;
     } catch (error) {
         throw error.response?.data || { message: "Error al eliminar el detalle de la orden" };

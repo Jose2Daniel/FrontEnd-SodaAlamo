@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-const URL = import.meta.env.VITE_API_URL;
+const LINK = import.meta.env.VITE_API_LINK;
 
 
 const registerClient = async (clientData) => {
     console.log('Sending client data:', clientData);
 
     try {
-        const response = await axios.post(`${URL}/client/register`, clientData)
+        const response = await axios.post(`${LINK}/client/register`, clientData)
         return response.data;
     } catch (error) {
         console.error("Error response:", error.response);
@@ -17,7 +17,7 @@ const registerClient = async (clientData) => {
 
 const loginClient = async (loginData) => {
     try {
-        const response = await axios.post(`${URL}/client/login`, loginData);
+        const response = await axios.post(`${LINK}/client/login`, loginData);
         sessionStorage.setItem('clientName', response.data.clientName);
         return response.data;
     } catch (error) {
@@ -30,7 +30,7 @@ const loginClient = async (loginData) => {
 
 const getAllClients = async () => {
     try {
-        const response = await axios.get(`${URL}/client`);
+        const response = await axios.get(`${LINK}/client`);
         return response.data;
     } catch (error) {
         console.error("Error al obtener los clientes:", error.response || error);
@@ -45,7 +45,7 @@ export const getClientById = async (clientId) => {
     }
 
     try {
-        const response = await axios.get(`${URL}/client/${clientId}`, {
+        const response = await axios.get(`${LINK}/client/${clientId}`, {
             headers: {
                 Authorization: `Bearer ${codedToken}`, // Add token in headers
             },
@@ -60,7 +60,7 @@ export const getClientById = async (clientId) => {
 
 // const updateClient = async (id, updatedData) => {
 //     try {
-//         const response = await axios.put(`${URL}/client/${id}`, updatedData); // Fixed URL
+//         const response = await axios.put(`${LINK}/client/${id}`, updatedData); // Fixed LINK
 //         return response.data;
 //     } catch (error) {
 //         throw error.response?.data || { message: "Error al actualizar el cliente" };
@@ -73,7 +73,7 @@ export const getClientById = async (clientId) => {
 //     }
     
 //     try {
-//         const response = await axios.put(`${URL}/client/${id}`, clientData, {
+//         const response = await axios.put(`${LINK}/client/${id}`, clientData, {
 //             headers: {
 //                 Authorization: `Bearer ${token}`, // Include token
 //                 "Content-Type": "application/json",
@@ -94,7 +94,7 @@ const updateClient = async (id, clientData) => {
     }
     
     try {
-        const response = await axios.put(`${URL}/client/${id}`, clientData, {
+        const response = await axios.put(`${LINK}/client/${id}`, clientData, {
             headers: {
                 Authorization: `Bearer ${token}`, // Include token
                 "Content-Type": "application/json",
@@ -110,7 +110,7 @@ const updateClient = async (id, clientData) => {
 
 // const deleteClient = async (id) => {
 //     try {
-//         const response = await axios.delete(`${URL}/client/${id}`); // Fixed URL
+//         const response = await axios.delete(`${LINK}/client/${id}`); // Fixed LINK
 //         return response.data;
 //     } catch (error) {
 //         throw error.response?.data || { message: "Error al eliminar el cliente" };
@@ -124,7 +124,7 @@ const deleteClient = async (id) => {
     }
 
     try {
-        const response = await axios.delete(`${URL}/client/${id}`, {
+        const response = await axios.delete(`${LINK}/client/${id}`, {
             headers: {
                 Authorization: `Bearer ${token}`, // Include token
             },
