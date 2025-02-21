@@ -35,7 +35,7 @@ const Routing = () => {
           path="/admin" 
           element={<ProtectedRoute allowedRole="admin" />}
         >
-          <Route path="" element={<AdminPage />}>
+          <Route path="" element={<adminPage />}>
             <Route path="almacen" element={<almacen />} />
             <Route path="ordenes" element={<ordenes />} />
             <Route path="clientes" element={<clientes />} />
@@ -44,7 +44,7 @@ const Routing = () => {
         </Route>
         
         {/* Ruta pública para usuarios */}
-        <Route path="/User" element={<User />} />
+        <Route path="/user" element={<user />} />
       </Routes>
     </Router>
   );
