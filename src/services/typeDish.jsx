@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const LINK = import.meta.env.VITE_API_LINK;
+const LINK = import.meta.env.LINK;
 
 
 const createTypeDish = async (typeDishData) => {
