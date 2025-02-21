@@ -1,8 +1,5 @@
 import axios from 'axios';
 
-const LINK = import.meta.env.LINK;
-
-
 const registerClient = async (clientData) => {
     console.log('Sending client data:', clientData);
 

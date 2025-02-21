@@ -1,41 +1,39 @@
 import axios from 'axios';
 
-const LINK = import.meta.env.LINK;
-
 const postDrink = async (drinkData) => {
     try {
-        const response = await axios.post(`${LINK}/drink`, drinkData);
+        const response = await axios.post("https://sodaalamoapp.onrender.com/drink", drinkData);
         return response.data;
     } catch (error) {
-        throw error.response?.data || { message: " Error al crear bebida "};
-    };
+        throw error.response?.data || { message: "Error al crear bebida" };
+    }
 };
 
 const getDrink = async () => {
     try {
-        const response = await axios.get(`${LINK}/drink`)
-        return response.data
+        const response = await axios.get("https://sodaalamoapp.onrender.com/drink");
+        return response.data;
     } catch (error) {
-        throw error.response?.data || { message: " Error al obtener bebidas "};
-    };
+        throw error.response?.data || { message: "Error al obtener bebidas" };
+    }
 };
 
 const putDrink = async (id, datos) => {
     try {
-        const response = await axios.put(`${LINK}/drink/${id}`);
+        const response = await axios.put(`https://sodaalamoapp.onrender.com/drink/${id}`, datos);
         return response.data;
     } catch (error) {
-        throw error.response?.data || { message: " Error al editar categoria "}
+        throw error.response?.data || { message: "Error al editar bebida" };
     }
-}
+};
 
 const deleteDrink = async (id) => {
     try {
-        const response = await axios.delete(`${LINK}/drink/${id}`);
-        return response.data
+        const response = await axios.delete(`https://sodaalamoapp.onrender.com/drink/${id}`);
+        return response.data;
     } catch (error) {
-        throw error.response?.data || { message: " Error al eliminar categoria "};
-    };
+        throw error.response?.data || { message: "Error al eliminar bebida" };
+    }
 };
 
-export {postDrink, getDrink, putDrink, deleteDrink};
+export { postDrink, getDrink, putDrink, deleteDrink };
