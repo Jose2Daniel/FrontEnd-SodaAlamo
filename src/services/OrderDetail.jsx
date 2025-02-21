@@ -4,7 +4,7 @@ const LINK = import.meta.env.LINK;
 
 const postOrderDetail = async (orderDetailData) => {
     try {
-        const response = await axios.post(`${LINK}/orderDetail`, orderDetailData);
+        const response = await axios.post(`${'https://sodaalamoapp.onrender.com'}/orderDetail`, orderDetailData);
         return response.data;
     } catch (error) {
         throw error.response?.data || { message: "Error al crear el detalle de la orden" };
