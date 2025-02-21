@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { AppBar, Toolbar, Typography, Box, IconButton, Menu, MenuItem, TextField, Button, InputAdornment } from "@mui/material";
+import { AppBar, Toolbar, Typography, Box, IconButton, MenuItem, TextField, Button, InputAdornment } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useNavigate } from "react-router-dom"; // Importamos useNavigate
 
 const Header = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const navigate = useNavigate(); // Inicializamos useNavigate
 
     const handleMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
@@ -29,7 +31,7 @@ const Header = () => {
                         noWrap
                         component="div"
                         sx={{ cursor: "pointer", mr: 2, fontFamily: "'Patrick Hand', cursive", color: "#008000" }}
-                        onClick={() => (window.location.href = "/home")}
+                        onClick={() => navigate("/home")} // Reemplazamos window.location.href
                     >
                         Inicio
                     </Typography>
@@ -38,7 +40,7 @@ const Header = () => {
                         noWrap
                         component="div"
                         sx={{ cursor: "pointer", mr: 2, fontFamily: "'Patrick Hand', cursive", color: "#008000" }}
-                        onClick={() => (window.location.href = "/AboutUs")}
+                        onClick={() => navigate("/AboutUs")}
                     >
                         Quienes Somos
                     </Typography>
@@ -47,7 +49,7 @@ const Header = () => {
                         noWrap
                         component="div"
                         sx={{ cursor: "pointer", mr: 2, fontFamily: "'Patrick Hand', cursive", color: "#008000" }}
-                        onClick={() => (window.location.href = "/Contacto")}
+                        onClick={() => navigate("/Contacto")}
                     >
                         Contáctenos
                     </Typography>
@@ -56,7 +58,7 @@ const Header = () => {
                         noWrap
                         component="div"
                         sx={{ cursor: "pointer", mr: 2, fontFamily: "'Patrick Hand', cursive", color: "#008000" }}
-                        onClick={() => (window.location.href = "/Menu")}
+                        onClick={() => navigate("/Menu")}
                     >
                         Menú
                     </Typography>
@@ -64,7 +66,7 @@ const Header = () => {
                 {/* Ícono de perfil y Búsqueda */}
                 <Box sx={{ display: "flex", alignItems: "center", flexGrow: { xs: 1, md: 0 } }}>
                     <IconButton
-                        onClick={() => (window.location.href = "/User")}
+                        onClick={() => navigate("/User")} // Reemplazamos window.location.href
                         sx={{ color: "#008000", mr: 2 }}
                     >
                         <AccountCircleIcon />
@@ -120,11 +122,11 @@ const Header = () => {
                         borderTop: "1px solid #ddd",
                     }}
                 >
-                    <MenuItem onClick={() => (window.location.href = "/home")}>Inicio</MenuItem>
-                    <MenuItem onClick={() => (window.location.href = "/AboutUs")}>Quienes Somos</MenuItem>
-                    <MenuItem onClick={() => (window.location.href = "/Contacto")}>Contáctenos</MenuItem>
-                    <MenuItem onClick={() => (window.location.href = "/Menu")}>Menú</MenuItem>
-                    <MenuItem onClick={() => (window.location.href = "/User")}>
+                    <MenuItem onClick={() => navigate("/home")}>Inicio</MenuItem>
+                    <MenuItem onClick={() => navigate("/AboutUs")}>Quienes Somos</MenuItem>
+                    <MenuItem onClick={() => navigate("/Contacto")}>Contáctenos</MenuItem>
+                    <MenuItem onClick={() => navigate("/Menu")}>Menú</MenuItem>
+                    <MenuItem onClick={() => navigate("/User")}>
                         <AccountCircleIcon sx={{ mr: 1 }} /> Perfil
                     </MenuItem>
                 </Box>
