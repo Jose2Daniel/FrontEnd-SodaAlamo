@@ -7,7 +7,8 @@ const registerClient = async (clientData) => {
     console.log('Sending client data:', clientData);
 
     try {
-        const response = await axios.post(`${LINK}/client/register`, clientData)
+        const response = await axios.post(
+            `https://sodaalamoapp.onrender.com/client/register`, clientData);
         return response.data;
     } catch (error) {
         console.error("Error response:", error.response);
@@ -17,7 +18,7 @@ const registerClient = async (clientData) => {
 
 const loginClient = async (loginData) => {
     try {
-        const response = await axios.post(`${LINK}/client/login`, loginData);
+        const response = await axios.post(`https://sodaalamoapp.onrender.com/client/login`, loginData);
         sessionStorage.setItem('clientName', response.data.clientName);
         return response.data;
     } catch (error) {
@@ -30,7 +31,7 @@ const loginClient = async (loginData) => {
 
 const getAllClients = async () => {
     try {
-        const response = await axios.get(`${LINK}/client`);
+        const response = await axios.get(`https://sodaalamoapp.onrender.com/client/register`, clientData);
         return response.data;
     } catch (error) {
         console.error("Error al obtener los clientes:", error.response || error);
@@ -45,47 +46,18 @@ export const getClientById = async (clientId) => {
     }
 
     try {
-        const response = await axios.get(`${LINK}/client/${clientId}`, {
+        const response = await axios.get(`https://sodaalamoapp.onrender.com/client/${clientId}`, {
             headers: {
-                Authorization: `Bearer ${codedToken}`, // Add token in headers
+                Authorization: `Bearer ${codedToken}`,
             },
         });
         return response.data;
     } catch (error) {
-        console.error("Error in getClientById:", error.response?.data || error);
-        throw error.response?.data || error;
+        console.error("Error in getClientById:", error.response?.data || error.message);
+        throw error.response?.data || { message: "Error al obtener el cliente" };
     }
 };
 
-
-// const updateClient = async (id, updatedData) => {
-//     try {
-//         const response = await axios.put(`${LINK}/client/${id}`, updatedData); // Fixed LINK
-//         return response.data;
-//     } catch (error) {
-//         throw error.response?.data || { message: "Error al actualizar el cliente" };
-//     }
-// };
-// const updateClient = async (id, clientData) => {
-//     const token = sessionStorage.getItem("token");
-//     if (!token) {
-//         throw new Error("Token not found in sessionStorage");
-//     }
-    
-//     try {
-//         const response = await axios.put(`${LINK}/client/${id}`, clientData, {
-//             headers: {
-//                 Authorization: `Bearer ${token}`, // Include token
-//                 "Content-Type": "application/json",
-//             },
-//         });
-//         return response.data; // Ensure this returns data
-
-//     } catch (error) {
-//         console.error("Error in updateClient:", error.response?.data || error);
-//         throw error.response?.data || error;
-//     }
-// };
 
 const updateClient = async (id, clientData) => {
     const token = sessionStorage.getItem("token");
@@ -94,7 +66,7 @@ const updateClient = async (id, clientData) => {
     }
     
     try {
-        const response = await axios.put(`${LINK}/client/${id}`, clientData, {
+        const response = await axios.put(`https://sodaalamoapp.onrender.com/client/${clientId}`, clientData, {
             headers: {
                 Authorization: `Bearer ${token}`, // Include token
                 "Content-Type": "application/json",
@@ -108,15 +80,6 @@ const updateClient = async (id, clientData) => {
     }
 };
 
-// const deleteClient = async (id) => {
-//     try {
-//         const response = await axios.delete(`${LINK}/client/${id}`); // Fixed LINK
-//         return response.data;
-//     } catch (error) {
-//         throw error.response?.data || { message: "Error al eliminar el cliente" };
-//     }
-// };
-
 const deleteClient = async (id) => {
     const token = sessionStorage.getItem("token");
     if (!token) {
@@ -124,7 +87,7 @@ const deleteClient = async (id) => {
     }
 
     try {
-        const response = await axios.delete(`${LINK}/client/${id}`, {
+        const response = await axios.delete(`https://sodaalamoapp.onrender.com/client/${clientId}`, {
             headers: {
                 Authorization: `Bearer ${token}`, // Include token
             },
