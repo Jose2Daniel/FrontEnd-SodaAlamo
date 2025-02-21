@@ -1,18 +1,18 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
-import Home from "../pages/Home";
-import AboutUs from "../pages/AboutUs";
-import Contacto from "../pages/Contacto";
-import Menu from "../pages/Menu";
-import Order from "../pages/Order";
-import User from "../pages/User";
-import Almacen from "../components/Almacen";
-import Ordenes from "../components/Ordenes";
-import Clientes from "../components/Clientes";
-import Opciones from "../components/Opciones";
+import login from "../pages/Login";
+import register from "../pages/Register";
+import home from "../pages/Home";
+import aboutUs from "../pages/AboutUs";
+import contacto from "../pages/Contacto";
+import menu from "../pages/Menu";
+import order from "../pages/Order";
+import user from "../pages/User";
+import almacen from "../components/Almacen";
+import ordenes from "../components/Ordenes";
+import clientes from "../components/Clientes";
+import opciones from "../components/Opciones";
 import ProtectedRoute from "../routes/ProtectedRoute";
-import AdminPage from "../pages/Admin";
+import adminPage from "../pages/Admin";
 
 
 
@@ -22,13 +22,13 @@ const Routing = () => {
     <Router>
       <Routes>
         {/* Rutas públicas */}
-        <Route path="/" element={<Register />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/Home" element={<Home />} />
-        <Route path="/AboutUs" element={<AboutUs />} />
-        <Route path="/Contacto" element={<Contacto />} />
-        <Route path="/Menu" element={<Menu />} />
-        <Route path="/Order" element={<Order />} />
+        <Route path="/" element={<register />} />
+        <Route path="/login" element={<login />} />
+        <Route path="/home" element={<home />} />
+        <Route path="/aboutUs" element={<aboutUs />} />
+        <Route path="/contacto" element={<contacto />} />
+        <Route path="/menu" element={<menu />} />
+        <Route path="/order" element={<order />} />
 
         {/* Ruta protegida para Admin */}
         <Route 
@@ -36,10 +36,10 @@ const Routing = () => {
           element={<ProtectedRoute allowedRole="admin" />}
         >
           <Route path="" element={<AdminPage />}>
-            <Route path="almacen" element={<Almacen />} />
-            <Route path="ordenes" element={<Ordenes />} />
-            <Route path="clientes" element={<Clientes />} />
-            <Route path="opciones" element={<Opciones />} />
+            <Route path="almacen" element={<almacen />} />
+            <Route path="ordenes" element={<ordenes />} />
+            <Route path="clientes" element={<clientes />} />
+            <Route path="opciones" element={<opciones />} />
           </Route>
         </Route>
         
