@@ -3,8 +3,6 @@ import axios from 'axios';
 import { Box, Typography, Card, CardMedia, CardContent, Button, Modal, MenuItem, Select, InputLabel, FormControl, TextField } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { getDrink } from '../services/Drink';
-import { getDish } from '../services/Dish';
 
 const MenuComponent = () => {
     const [desayunoDishes, setDesayunoDishes] = useState([]);
@@ -20,20 +18,20 @@ const MenuComponent = () => {
     useEffect(() => {
         const fetchDishes = async () => {
             try {
-                const response = await getDish();
+                const response = await axios.get("https://sodaalamoapp.onrender.com/dish");
                 const allDishes = Array.isArray(response.data) ? response.data : [];
                 const Desayuno = [];
                 const Almuerzo = [];
                 const Cena = [];
                 allDishes.forEach(dish => {
                     switch (dish.typeDish?.typeName) {
-                        case 'Desayunos':
+                        case 'Desayuno':
                             Desayuno.push(dish);
                             break;
-                        case 'Almuerzos':
+                        case 'Almuerzo':
                             Almuerzo.push(dish);
                             break;
-                        case 'Cenas':
+                        case 'Cena':
                             Cena.push(dish);
                             break;
                         default:
@@ -43,14 +41,17 @@ const MenuComponent = () => {
                 setDesayunoDishes(Desayuno);
                 setAlmuerzoDishes(Almuerzo);
                 setCenaDishes(Cena);
+    
+                console.log("Desayunos:", Desayuno);
+                console.log("Almuerzos:", Almuerzo);
+                console.log("Cenas:", Cena);
             } catch (error) {
                 console.error('Error fetching dishes:', error);
             }
         };
-
         const fetchDrinks = async () => {
             try {
-                const response = await getDrink();
+                const response = await axios.get("https://sodaalamoapp.onrender.com/drink");
                 if (Array.isArray(response.data)) {
                     setDrinks(response.data);
                 } else {
@@ -78,8 +79,8 @@ const MenuComponent = () => {
     }, []);
 
     const renderDishCard = (dish) => {
-        const imageUrl = dish.imageUrl ? `${URL}${dish.imageUrl}` : '/placeholder.jpg';
-
+        const imageUrl = dish.imageUrl ? `https://sodaalamoapp.onrender.com/dish${dish.imageUrl}` : '/placeholder.jpg'
+    
         return (
             <Card key={dish._id} sx={{ maxWidth: 345, m: 2 }}>
                 <CardMedia
@@ -90,12 +91,12 @@ const MenuComponent = () => {
                     onError={(e) => e.target.src = '/placeholder.jpg'}
                 />
                 <CardContent>
-                    <Typography variant="h6">{dish.dishName}</Typography>
+                    <Typography variant="h6">{dish.dishName || "Sin nombre"}</Typography>
                     <Typography variant="body2" color="text.secondary">
-                        {dish.dishDescription}
+                        {dish.dishDescription || "Sin descripción"}
                     </Typography>
                     <Typography variant="body1" color="primary">
-                        ₡{dish.dishPrice.toFixed(2)}
+                        ₡{dish.dishPrice ? dish.dishPrice.toFixed(2) : "0.00"}
                     </Typography>
                     <Button onClick={() => handleOrderClick(dish)} variant="contained" color="primary">
                         Ordenar
@@ -104,6 +105,7 @@ const MenuComponent = () => {
             </Card>
         );
     };
+    
 
     const handleOrderClick = (dish) => {
         setSelectedDish(dish);
@@ -132,7 +134,7 @@ const MenuComponent = () => {
             const token = sessionStorage.getItem('token'); // O usa el método que estés usando para guardar el token
     
             const response = await axios.post(
-                `${URL}/orderDetail`,
+                `https://sodaalamoapp.onrender.com/orderDetail`,
                 orderDetailData,
                 {
                     headers: {
@@ -170,7 +172,7 @@ const MenuComponent = () => {
                     Desayuno
                 </Typography>
                 <Box display="flex" flexWrap="wrap" justifyContent="center">
-                    {desayunoDishes.map(renderDishCard)}
+                    {desayunoDishes.length > 0 ? desayunoDishes.map(renderDishCard) : <Typography>No hay platos disponibles</Typography>}
                 </Box>
             </Box>
 
@@ -179,7 +181,7 @@ const MenuComponent = () => {
                     Almuerzo
                 </Typography>
                 <Box display="flex" flexWrap="wrap" justifyContent="center">
-                    {almuerzoDishes.map(renderDishCard)}
+                    {almuerzoDishes.length > 0 ? almuerzoDishes.map(renderDishCard) : <Typography>No hay platos disponibles</Typography>}
                 </Box>
             </Box>
 
@@ -188,7 +190,7 @@ const MenuComponent = () => {
                     Cena
                 </Typography>
                 <Box display="flex" flexWrap="wrap" justifyContent="center">
-                    {cenaDishes.map(renderDishCard)}
+                    {cenaDishes.length > 0 ? cenaDishes.map(renderDishCard) : <Typography>No hay platos disponibles</Typography>}
                 </Box>
             </Box>
 
