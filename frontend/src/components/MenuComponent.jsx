@@ -3,8 +3,8 @@ import axios from 'axios';
 import { Box, Typography, Card, CardMedia, CardContent, Button, Modal, MenuItem, Select, InputLabel, FormControl, TextField } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-const URL = import.meta.env.VITE_API_URL;
+import { getDrink } from '../services/Drink';
+import { getDish } from '../services/Dish';
 
 const MenuComponent = () => {
     const [desayunoDishes, setDesayunoDishes] = useState([]);
@@ -20,7 +20,7 @@ const MenuComponent = () => {
     useEffect(() => {
         const fetchDishes = async () => {
             try {
-                const response = await axios.get(`${URL}/dish`);
+                const response = await getDish();
                 const allDishes = Array.isArray(response.data) ? response.data : [];
                 const Desayuno = [];
                 const Almuerzo = [];
@@ -50,10 +50,16 @@ const MenuComponent = () => {
 
         const fetchDrinks = async () => {
             try {
-                const response = await axios.get(`${URL}/drink`);
-                setDrinks(response.data);
+                const response = await getDrink();
+                if (Array.isArray(response.data)) {
+                    setDrinks(response.data);
+                } else {
+                    console.error('Respuesta de bebidas no es un arreglo:', response.data);
+                    setDrinks([]);  // En caso de que la respuesta no sea válida
+                }
             } catch (error) {
                 console.error('Error fetching drinks:', error);
+                setDrinks([]);  // En caso de error en la solicitud
             }
         };
 
